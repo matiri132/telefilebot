@@ -1,0 +1,30 @@
+version: "2.3"
+services:
+  demo-container-db:
+    image: postgres:15.2
+    mem_limit: 1536MB
+    mem_reservation: 1G
+    environment:
+      POSTGRES_USER: databas
+      POSTGRES_PASSWORD: password
+    ports:
+    - "5442:5432"
+    networks:
+    - pg_network
+    volumes:
+    - db-data:/var/lib/postgresql/data
+  demo-pgadmin4:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@adm.in 
+      PGADMIN_DEFAULT_PASSWORD: password 
+    ports:
+    - "8889:80"
+    networks:
+    - pg_network 
+networks:
+  pg_network:
+    driver: bridge
+ 
+volumes:
+  db-data:
