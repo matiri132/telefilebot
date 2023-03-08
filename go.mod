@@ -1,4 +1,4 @@
-module telefilebot
+module github.com/matiri132/telefilebot
 
 go 1.19
 

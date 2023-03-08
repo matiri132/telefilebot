@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/matiri132/telefilebot/pkg/tgfileutils"
+	fu "github.com/matiri132/telefilebot/pkg/fileutils"
 	"github.com/mymmrac/telego"
 	"os"
 )
@@ -26,11 +26,11 @@ func main() {
 	// Loop through all updates when they came
 	for update := range updates {
 		fmt.Printf("Update: %+v\n\n", update.Message)
-		msg_file, err := GetMsgFile(update.Message)
+		msg_file, err := fu.GetMsgFile(update.Message)
 		msg_data, err1 := msg_file.GetData(bot)
 		if err == nil && err1 == nil {
 			if msg_file.Type != "text" {
-				if size, err := DownloadFile(&msg_file, botToken, baseBotUrl, msg_data); err != nil {
+				if size, err := fu.DownloadFile(&msg_file, botToken, baseBotUrl, msg_data); err != nil {
 					fmt.Printf("Error in DownloadFile with: %+v\n", err)
 				} else {
 					fmt.Printf("Downloaded a file %s with size %d\n", msg_data, size)
@@ -46,5 +46,4 @@ func main() {
 			}
 		}
 	}
-
 }

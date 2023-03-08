@@ -1,4 +1,4 @@
-package tgfileutils
+package fileutils
 
 import (
 	"bytes"
